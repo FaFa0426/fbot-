@@ -18,6 +18,9 @@ bot.on('ready', function () {
     bot.user.setActivity('la création de FaFa2604', {type:'WATCHING'})
     .then(() => console.log('activité mis avec succés'))
     .catch(console.error)
+    bot.user.setUsername('EntrePotes\'bot')
+    .then(() => console.log('activité mis avec succés'))
+    .catch(console.error)
 })
 
 bot.on('guildMemberAdd', function (member) {
