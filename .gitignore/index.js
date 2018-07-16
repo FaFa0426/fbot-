@@ -1,15 +1,74 @@
-const Discord = require('discord.js')
-const bot = new Discord.Client()
+const Discord = require('discord.js');
+const bot = new Discord.Client();
+var prefixx = ('!');
 
 bot.on('ready', () => {
     console.log('fbot opérationnel')
 }) 
 
 bot.on('message', function (message) {
-    if (message.content === '!ping') {
+    if (message.content === '!!ping') {
         message.channel.sendMessage('pong')
+    };
+    if (message.content === '!!flip' || message.content === '!flip') {
+		var flip = Math.floor(Math.random() * 2 + 1);
+		if (flip === 1) {
+			console.log('pil')
+			message.reply('La pièce a fait pil!')
+		}
+		else {
+			console.log('face');
+			message.reply('La pièce a fait face!')
+        };
+    };
+    if (message.content.toLowerCase() === 'salut')
+        message.channel.send('Salut à toi' + message.author);
+
+        var prefixx = ("!!");
+
+        var args = message.content.substring(prefixx.length).split(' ');
+
+    switch (args[0].toLowerCase()){
+        case "8ball":
+        let args = message.content.split(" ").slice(1);
+
+        let tte = args.join(" ");
+
+        if (!tte){
+            return message.reply ("Veuillez posez une question :8ball:.")};
+
+            var replys = [ 
+                "Oui.",
+
+                "Non.",
+
+                "C'est presque sûr.",
+
+                "Il y a des chances.",
+
+                "Évidemment.",
+
+                "Il vaut mieux ne pas vous répondre...",
+
+                "Sûrement",
+
+                "Reposez votre question plus tard."
+            ]
+
+            let réponse = (replys[Math.floor(Math.random() * replys.length)])
+            var bembed = new Discord.RichEmbed()
+            .setDescription(':8ball: 8ball')
+            .setAuthor(message.author.tag)
+            .setColor('#000000')
+            .setTitle('commande 8ball')
+            .addField('Question:', tte)
+            .addField('Réponse', réponse) 
+            .setFooter('8ball')
+        message.channel.sendEmbed(bembed)
+             
     }
 })
+
 
 bot.on('ready', function () {
     bot.user.setAvatar('./avatar chinois.jpg')
@@ -30,7 +89,7 @@ bot.on('guildMemberAdd', function (member) {
     )
 })
 
-const prefix = '~';
+const prefix = '!!';
 function hook(channel, title, message, color, avatar) {
 
     if (!channel) return console.log('Channel not specified.');
@@ -85,63 +144,6 @@ function hook(channel, title, message, color, avatar) {
 bot.on('message', message => {
 
     let msg = message.content.toUpperCase();
-    let sender = message.author
-    let cont = message.content.slice(prefix.length).split(" ");
-
-    if (msg.startsWith(prefix + 'PURGE')) {
-        async function purge() {
-            message.delete();
-
-            if (!message.member.roles.find("name", "bot-commander")) {
-                message.channel.send('You need the \`bot-commander\` role to use this command.');
-                return; 
-            }
-
-            if (isNaN(args[0])) {
-                message.channel.send('Please use a number as your arguments. \n Usage: ' + prefix + 'purge <amount>');
-                return;
-            }
-
-            const fetched = await message.channel.fetchMessages({limit: args[0]});
-            console.log(fetched.size + ' messages found, deleting...');
-
-            message.channel.bulkDelete(fetched)
-                .catch(error => message.channel.send(`Error: ${error}`));
-
-        }
-
-        purge();
-
-    }
-
-
-    if (msg.startsWith(prefix + 'WEATHER')) {
-
-        weather.find({search: args.join(" "), degreeType: 'F'}, function(err, result) {
-            if (err) message.channel.send(err);
-
-            if (result === undefined || result.length === 0) {
-                message.channel.send('**Please enter a valid location.**')
-            }
-
-            var current = result[0].current;
-            var location = result[0].location;
-
-            const embed = new Discord.RichEmbed()
-                .setDescription(`**${current.skytext}**`)
-                .setAuthor(`Weather for ${current.observationpoint}`)
-                .setThumbnail(current.imageUrl)
-                .setColor(0x00AE86)
-                .addField('Timezone',`UTC${location.timezone}`, true)
-                .addField('Degree Type',location.degreetype, true)
-                .addField('Temperature',`${current.temperature} Degrees`, true)
-                .addField('Feels Like', `${current.feelslike} Degrees`, true)
-                .addField('Winds',current.winddisplay, true)
-                .addField('Humidity', `${current.humidity}%`, true)
-
-                message.channel.send({embed});
-        });
-    }
 
     if (msg.startsWith(prefix + 'HOOK')) {
 
@@ -155,6 +157,191 @@ bot.on('message', message => {
         hook(message.channel, hookArgs[0], hookArgs[1], hookArgs[2], hookArgs[3]);
     }
 
+});
+
+var randnum = 0
+
+function random(min, max) {
+    min = Math.ceil(0)
+    max = Math.floor(16)
+    randnum = Math.floor(Math.random() * (max - min +1) + min)
+};
+
+var aleanum = 0
+
+function aleatoire(min, max){
+    min = Math.ceil(0)
+    max = Math.floor(2)
+    aleanum = Math.floor(Math.random() * (max - min +1) + min)
+};
+
+bot.on('message', function (message){
+    if (message.content === '!!test'){
+        aleatoire();
+        if (aleanum == 1){
+            message.reply('1');
+        };
+        if (aleanum == 2){
+            message.reply('2');
+        };
+    };
+    if (message.content === '!!jeux'){
+    random();
+
+    if (randnum == 1){
+        message.reply('League of legends');
+    };
+    if (randnum == 2){
+        message.reply('Fortnite Battle Royale');
+    };
+    if (randnum == 3){
+        message.reply('Fortnite Sauver le monde');
+    };
+    if (randnum == 4){
+        message.reply('Minecraft');
+    };
+    if (randnum == 5){
+        message.reply('Bomb Party');
+    };
+    if (randnum == 6){
+        message.reply('Brawlhalla');
+    };
+    if (randnum == 7){
+        message.reply('Business Tour(500 jeton');
+    };
+    if (randnum == 8){
+        message.reply('Paladins Siege');
+    }
+    if (randnum == 9){
+        message.reply('S4 League');
+    };
+    if (randnum == 10){
+        message.reply('Lanceur choisi');
+    };
+    if (randnum == 11){
+        message.reply('Business Tour(100 jeton)');
+    };
+    if (randnum == 12){
+        message.reply('Rocket League');
+    };
+    if (randnum == 13){
+        message.reply('Autre Chosi')
+    };
+    if (randnum == 14){
+        message.reply('Cities Skyline');
+    };
+    if (randnum == 15){
+        message.reply('The Escapist 2');
+    };
+}
+
+if (message.content === '!!mode'){
+    random();
+    if (randnum == 9){
+        message.reply('casual');
+    };
+    if (randnum == 1){
+        message.reply('Classé');
+    };
+    if (randnum == 2){
+        message.reply('Classé');
+    };
+    if (randnum == 3){
+        message.reply('Classé');
+    };
+    if (randnum == 4){
+        message.reply('Classé');
+    };
+    if (randnum == 5){
+        message.reply('Classé');
+    };
+    if (randnum == 6){
+        message.reply('Classé');
+    };
+    if (randnum == 7){
+        message.reply('Classé');
+    };
+    if (randnum == 8){
+        message.reply('Classé');
+    };
+    if (randnum == 9){
+        message.reply('casual');
+    };
+    if (randnum == 10){
+        message.reply('casual');
+    };
+    if (randnum == 11){
+        message.reply('casual');
+    };
+    if (randnum == 12){
+        message.reply('casual');
+    };
+    if (randnum == 13){
+        message.reply('casual');
+    };
+    if (randnum == 14){
+        message.reply('casual');
+    };
+    if (randnum == 15){
+        message.reply('casual');
+    };
+    if (randnum == 16){
+        message.reply('casual');
+    };
+      
+};
+
+if (message.content === '!!temp'){
+    random();
+    if (randnum == 1){
+        message.reply('1 game ');
+    };
+    if (randnum == 2){
+        message.reply('1 game ');
+    };
+    if (randnum == 3){
+        message.reply('1 game ');
+    };
+    if (randnum == 4){
+        message.reply('1 game ');
+    };
+    if (randnum == 5){
+        message.reply('1 heure');
+    };
+    if (randnum == 6){
+        message.reply('1 heure');
+    };
+    if (randnum == 7){
+        message.reply('1 heure');
+    };
+    if (randnum == 8){
+        message.reply('1 heure');
+    };
+    if (randnum == 9){
+        message.reply('2 heure');
+    };
+    if (randnum == 10){
+        message.reply('2 heure');
+    };
+    if (randnum == 11){
+        message.reply('2 heure');
+    };
+    if (randnum == 12){
+        message.reply('2 heure');
+    };
+    if (randnum == 13){
+        message.reply('toute la journée');
+    };
+    if (randnum == 14){
+        message.reply('toutela journée');
+    };
+    if (randnum == 15){
+        message.reply('toute la journée');
+    };
+    if (randnum == 16){
+        message.reply('toute la journée');
+    };
+    };
 });
 
 bot.login(process.env.TOKEN)
