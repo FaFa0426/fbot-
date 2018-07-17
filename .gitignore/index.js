@@ -1,12 +1,12 @@
 const Discord = require('discord.js');
 const bot = new Discord.Client();
-var prefixx = ('!');
 
 bot.on('ready', () => {
     console.log('fbot opérationnel')
 }) 
 
 bot.on('message', function (message) {
+
     if (message.content === '!!ping') {
         message.channel.sendMessage('pong')
     };
@@ -52,7 +52,17 @@ bot.on('message', function (message) {
 
                 "Sûrement",
 
-                "Reposez votre question plus tard."
+                "Reposez votre question plus tard.",
+
+                "Bien sûr que non.",
+
+                "Tout à fait.",
+
+                "Peut être :).",
+
+                "Impossible.",
+
+                "Impossible."
             ]
 
             let réponse = (replys[Math.floor(Math.random() * replys.length)])
@@ -176,13 +186,13 @@ function aleatoire(min, max){
 };
 
 bot.on('message', function (message){
-    if (message.content === '!!test'){
+    if (message.content === '!!flipcoin'){
         aleatoire();
         if (aleanum == 1){
-            message.reply('1');
+            message.reply('Pil !');
         };
         if (aleanum == 2){
-            message.reply('2');
+            message.reply('Face !');
         };
     };
     if (message.content === '!!jeux'){
